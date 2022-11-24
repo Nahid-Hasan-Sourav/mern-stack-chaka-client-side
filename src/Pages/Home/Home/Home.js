@@ -18,7 +18,11 @@ const Home = () => {
                </div>
            </section>
            <section>
-           <h3 className='font-extrabold text-3xl my-8'>
+           <h3 className='font-extrabold text-3xl my-8' 
+           data-aos="fade-right"
+          
+          
+           >
                   Select Your <span className='text-[#E22937]'>Categories</span>
             </h3>
            </section>

@@ -26,7 +26,9 @@ const WhyTrust = () => {
            {
                 trust.map((item)=>{
                     return (
-                      <div className="card bg-base-100 shadow-xl ">
+                      <div className="card bg-base-100 shadow-xl "
+                      data-aos="zoom-out-down"
+                      >
                         <div className="card-body">
                           <div className="flex items-center justify-center">
                            <span className='mr-6 text-[#E22937] font-bold text-2xl'>{item.Number}</span>
