@@ -6,15 +6,15 @@ import PrimaryButton from '../../../Components/Button/PrimaryButton'
 
 const ErrorPage = () => {
   return (
-    <section className='flex items-center h-screen p-16 bg-gray-100 text-gray-900'>
+    <section className='flex items-center h-[100vh] p-16 bg-gray-100 text-gray-900'>
       <div className='container flex flex-col items-center justify-center px-5 mx-auto my-8'>
-        <HandThumbDownIcon className='w-40 h-40 text-green-400' />
+        <HandThumbDownIcon className='w-40 h-40 text-[#E22937]' />
         <div className='max-w-md text-center'>
           <h2 className='mb-8 font-extrabold text-9xl text-gray-500'>
             <span className='sr-only'>Error</span>
             <div className='flex justify-center items-center h-full'>
               4
-              <div className='w-24 h-24 border-8 border-dashed rounded-full animate-spin mt-3 border-green-400'></div>
+              <div className='w-24 h-24 border-8 border-dashed rounded-full animate-spin mt-3 border-[#E22937]'></div>
               4
             </div>
           </h2>
@@ -23,9 +23,9 @@ const ErrorPage = () => {
           </p>
           <Link to='/'>
           
-          <PrimaryButton classes='px-8 py-3 font-semibold rounded'>
+          <PrimaryButton classes='px-8 py-3 font-semibold rounded '>
               Back to homepage
-            </PrimaryButton>
+          </PrimaryButton>
           </Link>
         </div>
       </div>
