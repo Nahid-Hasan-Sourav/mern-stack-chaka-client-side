@@ -1,6 +1,7 @@
 
 import { Link } from 'react-router-dom';
 import logo from '../../../Logo/Chaka.png'
+import carLogo from '../../../Logo/Car.png'
 import { FaBars } from 'react-icons/fa';
 
 
@@ -10,7 +11,7 @@ const Navbar = () => {
     const menuItem = (
       <>
         <li className="text-black">
-          <Link to="/home" className='text-white'>Home</Link>
+          <Link to="/" className='text-white'>Home</Link>
         </li>
         <li className="text-black">
           <Link to="/appoinment" className='text-white'>Appoinment</Link>

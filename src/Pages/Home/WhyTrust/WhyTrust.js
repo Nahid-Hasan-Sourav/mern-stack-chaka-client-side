@@ -32,7 +32,7 @@ const WhyTrust = () => {
                         <div className="card-body">
                           <div className="flex items-center justify-center">
                            <span className='mr-6 text-[#E22937] font-bold text-2xl'>{item.Number}</span>
-                           <span className='ml-6 text-black font-bold'>{item.value}</span>
+                           <span className='ml-3 text-black font-bold'>{item.value}</span>
                           </div>                       
                         </div>
                       </div>
