@@ -24,10 +24,11 @@ const WhyTrust = () => {
         <div className='grid lg:grid-cols-4 md:grid-cols-2 gap-6 bg-[#f9f5f5] p-3'>
           
            {
-                trust.map((item)=>{
+                trust.map((item,i)=>{
                     return (
                       <div className="card bg-base-100 shadow-xl "
                       data-aos="zoom-out-down"
+                      key={i}
                       >
                         <div className="card-body">
                           <div className="flex items-center justify-center">

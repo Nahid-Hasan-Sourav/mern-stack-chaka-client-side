@@ -53,14 +53,14 @@ const Footer = () => {
           </div>
         </div>
         <div>
-          <span className="footer-title text-white font-bold">SERVICES</span>
+          <span className="footer-title opacity-100 font-bold text-2xl text-white font-bold">SERVICES</span>
           <Link className="text-white">Sell Car / Bike</Link>
           <Link className="text-white">Buy Car</Link>
           <Link className="text-white">Buy Bike</Link>
           <Link className="text-white">Advertisement</Link>
         </div>
         <div>
-          <span className="footer-title text-white font-bold">ABOUT CHAKA</span>
+          <span className="footer-title opacity-100 font-bold text-2xl text-white font-bold">ABOUT CHAKA</span>
           <Link className="text-white">About us</Link>
           <Link className="text-white">Contact</Link>
           <Link className="text-white">Terms and Conditions</Link>
@@ -68,7 +68,7 @@ const Footer = () => {
           <Link className="text-white">Refund Policy</Link>
         </div>
         <div>
-          <span className="footer-title text-white">MORE</span>
+          <span className="footer-title opacity-100 font-bold text-2xl text-white">MORE</span>
           <Link className="text-white">Car Compare</Link>
           <Link className="text-white">Bike Compare</Link>
           <Link className="text-white">News and Reviews</Link>
