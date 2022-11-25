@@ -19,8 +19,11 @@ const Navbar = () => {
         <li className="text-black">
           <Link to="/about" className='text-white'>About</Link>
         </li>
-        <li className="text-black">
-          <Link to="/about" className='text-white'>Reviews</Link>
+        <li className="text-black btn bg-[#E22937]">
+          <Link to="/login" className='text-white'>Login</Link>
+        </li>
+        <li className="text-black btn bg-[#E22937]">
+          <Link to="/signUp" className='text-white'>SignUp</Link>
         </li>
        
        
@@ -29,9 +32,9 @@ const Navbar = () => {
           </li> */}
       </>
     );
-
+    // #FFA836
     return (
-        <div className="navbar bg-[#052046] drop-shadow-md top-0 sticky z-10 flex justify-between px-4">
+        <div className="navbar bg-[#052046] drop-shadow-md top-0 sticky z-10 flex justify-between px-4 py-5">
           {/* this for md devices and small devices start here */}
         <div className="navbar-start bg-[#052046] ">
           <div className="dropdown ">

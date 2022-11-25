@@ -67,7 +67,7 @@ const BookingModal = ({specificItemsData,setspecificItemsData}) => {
           <div className="modal-box relative">
             <label
               htmlFor="booking-modal"
-              className="btn btn-sm btn-circle absolute right-2 top-2"
+              className="btn btn-sm bg-[#E22937] btn-circle absolute right-2 top-2"
             >
               ✕
             </label>
@@ -139,7 +139,7 @@ const BookingModal = ({specificItemsData,setspecificItemsData}) => {
                       
                     </div>
                     <div className="flex flex-col  mt-6 justify-evenly">
-                      <button className="btn btn-primary" type='submit'>Submit</button>
+                      <button className="btn bg-[#E22937] text-white font-bold" type='submit'>Submit</button>
                      
                     </div>
                   </form>

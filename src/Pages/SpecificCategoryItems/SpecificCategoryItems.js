@@ -65,7 +65,7 @@ const SpecificCategoryItems = () => {
                       >
                         Book Now
                       </button> */}
-                      <label htmlFor="booking-modal"  className="btn btn-primary fw-bold"
+                      <label htmlFor="booking-modal"  className="btn bg-[#E22937] fw-bold"
                        onClick={() => setspecificItemsData(data)}
                       >
                          Book Now
