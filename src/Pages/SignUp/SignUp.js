@@ -1,24 +1,89 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { FcGoogle } from 'react-icons/fc';
+import { getImageUrl } from '../../Api/imageUpload';
+import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
+import toast from 'react-hot-toast';
+import { GoogleAuthProvider } from 'firebase/auth';
 
 const SignUp = () => {
+  
+  const [erros, setErrors] = useState("");
+ 
+  const navigate=useNavigate()
+  const {createUser,providerLogin,updateUserProfile}=useContext(AuthContext)
+  const location = useLocation();
+  const fromss = location.state?.from?.pathname || "/";
+  const googleProvider =new GoogleAuthProvider()
   const handleSubmit=(e)=>{
     e.preventDefault();
     const form=e.target
     const name=form.name.value;
     const email=form.email.value;
     const password=form.password.value;
-    const image=form.image.files[0];
+    let image=form.image.files[0];
     const userRole=form.role.value;
 
-    const userInfo={
-      name,
-      email,
-      password,
-      image,
-      userRole
-    }
-    console.log("User Info",userInfo)
+   
+    getImageUrl(image)
+  
+    .then(imgData=>{
+      
+      // if(imgData.success){
+      //   let userInfo={
+      //     name,
+      //     email,
+      //     password,
+      //     image:imgData.data.url,
+      //     userRole
+      //   }
+      //   console.log(userInfo)
+      // }
+      let userInfo={
+        name,
+        email,
+        password,
+        image:imgData.data.url,
+        userRole
+      }
+
+      createUser(email, password)
+      .then(result=>{
+        const user=result.user;
+        
+        updateUserProfile(name,imgData.data.url)
+        .then(() => {})
+       .catch((error) => console.error(error));
+        console.log(user)
+        
+        setErrors("");
+        toast.success("Successfully complete the registration")
+        form.reset()
+        setTimeout(() => {
+          navigate('/')
+        }, "1000")
+      })
+      .catch(error=>{
+        console.log(error);
+        setErrors(error.message)
+      })
+      
+      
+    })
+   
+    
+  
+  }
+
+  const handleGoogleSignin=()=>{
+    providerLogin(googleProvider)
+    .then((result) => {
+      const user = result.user;
+      navigate(fromss, { replace: true });
+    })
+    .catch((error) => {
+      console.error(error);
+    });
   }
     return (
       <div className="hero min-h-screen bg-base-200 py-10">
@@ -82,10 +147,17 @@ const SignUp = () => {
                   <option  value="seller">Seller</option>
                 </select>
               </div>
+              <p className='text-red-700 font-bold'>{erros}</p>
               <div className="form-control mt-6">
                 <button className="btn btn-primary">Sign Up</button>
               </div>
+              <p className='mt-2'>Already Have an account please <Link to='/login' className='text-blue-500'> Login</Link></p>
+              <div className="divider">OR</div>
+              
             </form>
+            <div className="form-control mt-6 mx-6 mb-3">
+                <button className="btn btn-" onClick={handleGoogleSignin}><FcGoogle className='mr-2 text-2xl font-bold'/> Sign With Google</button>
+              </div>
           </div>
         </div>
       </div>

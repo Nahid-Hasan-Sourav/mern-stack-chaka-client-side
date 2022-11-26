@@ -1,18 +1,56 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-
+import React, { useContext, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { FcGoogle } from 'react-icons/fc';
+import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
+import { GoogleAuthProvider } from 'firebase/auth';
 const Login = () => {
+  const {signIn,providerLogin}=useContext(AuthContext)
+  const [loginError,setloginError]=useState()
+  const navigate = useNavigate()
+  const location = useLocation();
+  const fromss = location.state?.from?.pathname || "/";
+  const googleProvider =new GoogleAuthProvider()
+  const handleLogin=(e)=>{
+      e.preventDefault()
+      const form=e.target;
+      const email=form.email.value;
+      const password=form.password.value;
+      console.log("Email && Pass",email,password);
+      signIn(email, password)
+      .then(result=>{
+        const user=result.user;
+        console.log(user)
+        form.reset()
+        navigate(fromss, { replace: true });
+      })
+      .catch(err=>{
+        setloginError(err.message)
+      })
+  }
+
+  const handleGoogleSignin=()=>{
+    providerLogin(googleProvider)
+    .then((result) => {
+      const user = result.user;
+      navigate(fromss, { replace: true });
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+  }
+
     return (
       <div className="hero min-h-screen bg-base-200">
-        <div className="hero-content lg:w-2/4 md:2/4 w-full">
+        <div className="hero-content max-w-md">
           <div className="card  w-full  shadow-2xl bg-base-100">
-            <div className="card-body">
+            <form onSubmit={handleLogin} className="card-body">
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Email</span>
                 </label>
                 <input
                   type="text"
+                  name='email'
                   placeholder="email"
                   className="input input-bordered"
                 />
@@ -23,6 +61,7 @@ const Login = () => {
                 </label>
                 <input
                   type="text"
+                  name='password'
                   placeholder="password"
                   className="input input-bordered"
                 />
@@ -32,10 +71,16 @@ const Login = () => {
                   </Link>
                 </label>
               </div>
-             
+              <p className='text-red-700 font-bold'>{loginError && loginError}</p>
               <div className="form-control mt-6">
-                <button className="btn btn-primary">Login</button>
+                <button className="btn btn-primary" type='submit'>Login</button>
               </div>
+              <p>Don't Have an account please  <Link to='/signUp' className='text-blue-500'>signUp</Link></p>
+              <div className="divider">OR</div>
+              
+            </form>
+            <div className="form-control mt-6 mx-6 mb-3">
+                <button className="btn btn-"  onClick={handleGoogleSignin}><FcGoogle className='mr-2 text-2xl font-bold'/> Sign With Google</button>
             </div>
           </div>
         </div>

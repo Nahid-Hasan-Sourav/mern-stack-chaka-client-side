@@ -3,28 +3,48 @@ import { Link } from 'react-router-dom';
 import logo from '../../../Logo/Chaka.png'
 import carLogo from '../../../Logo/Car.png'
 import { FaBars } from 'react-icons/fa';
+import React, { useContext } from 'react';
+import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 
 
 
 const Navbar = () => {
-   
+   const {user,logOut}=useContext(AuthContext)
+
+   const handleLogout=()=>{
+    logOut().then(()=>{})
+    .catch(err=>console.error(err))
+   }
     const menuItem = (
       <>
         <li className="text-black">
           <Link to="/" className='text-white'>Home</Link>
         </li>
-        <li className="text-black">
-          <Link to="/appoinment" className='text-white'>Appoinment</Link>
+        {
+          user?.uid && <li className="text-black">
+          <Link to="/dashboard" className='text-white'>Dashboard</Link>
         </li>
+        }
         <li className="text-black">
           <Link to="/about" className='text-white'>About</Link>
         </li>
+        {
+          user?.uid ?
+         <React.Fragment>
+           <li className="text-black btn bg-[#E22937]">
+          <Link className='text-white' onClick={handleLogout}>Logout</Link>
+         </li>
+          
+         </React.Fragment>
+        :
         <li className="text-black btn bg-[#E22937]">
-          <Link to="/login" className='text-white'>Login</Link>
-        </li>
-        <li className="text-black btn bg-[#E22937]">
-          <Link to="/signUp" className='text-white'>SignUp</Link>
-        </li>
+        <Link to="/login" className='text-white'>Login</Link>
+      </li>
+        }
+        
+
+
+       
        
        
         {/* <li className='text-black'>

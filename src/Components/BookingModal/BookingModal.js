@@ -38,6 +38,7 @@ const BookingModal = ({specificItemsData,setspecificItemsData}) => {
             time,
             date
         }
+        // e.currentTarget.disabled = true;
 
         fetch('http://localhost:5000/bookings',{
             method:'POST',
@@ -50,6 +51,7 @@ const BookingModal = ({specificItemsData,setspecificItemsData}) => {
         .then(data=>{
             if(data.acknowledged){
                 toast.success("CONGRATULATION !! THE ITEM IS BOOKED");
+               
             }
         })
 
