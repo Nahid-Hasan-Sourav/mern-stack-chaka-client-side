@@ -5,6 +5,7 @@ import { getImageUrl } from '../../Api/imageUpload';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import toast from 'react-hot-toast';
 import { GoogleAuthProvider } from 'firebase/auth';
+import { setAuthToken } from '../../Api/auth';
 
 const SignUp = () => {
   
@@ -24,7 +25,7 @@ const SignUp = () => {
     let image=form.image.files[0];
     const userRole=form.role.value;
 
-   
+   console.log("Check for image",image)
     getImageUrl(image)
   
     .then(imgData=>{
@@ -42,19 +43,20 @@ const SignUp = () => {
       let userInfo={
         name,
         email,
-        password,
         image:imgData.data.url,
-        userRole
+        role:userRole
       }
 
       createUser(email, password)
       .then(result=>{
         const user=result.user;
-        
+        setAuthToken(userInfo)
+        // console.log("Before uodate user",user)
+
         updateUserProfile(name,imgData.data.url)
         .then(() => {})
        .catch((error) => console.error(error));
-        console.log(user)
+        // console.log(user)
         
         setErrors("");
         toast.success("Successfully complete the registration")
@@ -79,6 +81,14 @@ const SignUp = () => {
     providerLogin(googleProvider)
     .then((result) => {
       const user = result.user;
+      const googleUserSignin = {
+        email:user.email,
+        role:"user",
+        name:user.displayName,
+        image:user.photoURL
+      }
+      setAuthToken(googleUserSignin)
+
       navigate(fromss, { replace: true });
     })
     .catch((error) => {

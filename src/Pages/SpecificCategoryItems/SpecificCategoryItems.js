@@ -1,8 +1,24 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 import { useLoaderData } from 'react-router-dom';
+import { getRole } from '../../Api/UserRole';
 import BookingModal from '../../Components/BookingModal/BookingModal';
+import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 
 const SpecificCategoryItems = () => {
+    const {user}=useContext(AuthContext)
+
+    const [userRole,setuserRole]=useState('')
+
+  useEffect(()=>{
+      getRole(user?.email)
+      .then((data)=>{
+        console.log("User Role from sidebar :",data.role)
+        setuserRole(data.role)
+      })
+      .catch(err=>console.log("Error",err))
+  },[user])
+
     const data=useLoaderData()
     console.log("SpecificCategoryItems",data)
     const [specificItemsData,setspecificItemsData]=useState(null)
@@ -67,6 +83,8 @@ const SpecificCategoryItems = () => {
                       </button> */}
                       <label htmlFor="booking-modal"  className="btn bg-[#E22937] fw-bold"
                        onClick={(e) => setspecificItemsData(data,e)}
+
+                       disabled={userRole && userRole==='user' ? false : true}
                       >
                          Book Now
                       </label>
@@ -80,7 +98,10 @@ const SpecificCategoryItems = () => {
        <BookingModal
        specificItemsData={specificItemsData}
        setspecificItemsData={setspecificItemsData}
-       ></BookingModal>}
+       ></BookingModal>
+     
+      
+      }
        </div>
     );
 };

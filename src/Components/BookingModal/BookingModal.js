@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 
 const BookingModal = ({specificItemsData,setspecificItemsData}) => {
+
+  const {user}=useContext(AuthContext)
+
+  console.log("This is from booking modal",user)
 
     // const current = new Date();
     // // By default US English uses 12hr time with AM/PM

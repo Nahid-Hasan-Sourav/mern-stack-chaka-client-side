@@ -66,7 +66,7 @@ const Navbar = () => {
               {menuItem}
             </ul>
           </div>
-          <Link className="btn btn-ghost normal-case text-xl text-black">
+          <Link className="btn btn-ghost normal-case text-xl text-black" to='/'>
           <figure><img src={logo} alt="Movie"/></figure>
           </Link>
         </div>

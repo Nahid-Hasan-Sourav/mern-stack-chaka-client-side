@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import { GoogleAuthProvider } from 'firebase/auth';
+import { setAuthToken } from '../../Api/auth';
 const Login = () => {
   const {signIn,providerLogin}=useContext(AuthContext)
   const [loginError,setloginError]=useState()
@@ -19,7 +20,13 @@ const Login = () => {
       signIn(email, password)
       .then(result=>{
         const user=result.user;
-        console.log(user)
+        const googleUserSignin = {
+          email:user.email,        
+          name:user.displayName,
+          image:user.photoURL
+        }
+        setAuthToken(googleUserSignin)
+        console.log("sign in user",user)
         form.reset()
         navigate(fromss, { replace: true });
       })
@@ -32,6 +39,13 @@ const Login = () => {
     providerLogin(googleProvider)
     .then((result) => {
       const user = result.user;
+      const googleUserSignin = {
+        email:user.email,
+        role:"user",
+        name:user.displayName,
+        image:user.photoURL
+      }
+      setAuthToken(googleUserSignin)
       navigate(fromss, { replace: true });
     })
     .catch((error) => {

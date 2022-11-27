@@ -51,7 +51,14 @@ const AuthProvider = ({children}) => {
 
     const logOut = () => {
         setLoading(true);
+        localStorage.removeItem('chaka-token')
         return signOut(auth);
+    }
+
+
+    const imageUpload = () => {
+
+        
     }
 
     const authInfo={
