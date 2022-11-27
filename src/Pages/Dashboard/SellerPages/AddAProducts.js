@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import { useForm } from "react-hook-form";
 import { getImageUrl, getUpload } from '../../../Api/imageUpload';
+import toast from 'react-hot-toast';
 
 const AddAProducts = () => {
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
@@ -13,6 +14,16 @@ const AddAProducts = () => {
       console.log("check image for add book",image)
      
     
+      var today = new Date();
+      var date =
+        today.getFullYear() +
+        "-" +
+        (today.getMonth() + 1) +
+        "-" +
+        today.getDate();
+      var time =
+        today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+
         const userInfo={
             userName:user.displayName,
             userEmail:user.email,
@@ -35,28 +46,29 @@ const AddAProducts = () => {
           categoryId='191_cBx_offRoader'
         }
 
-        const addProductInfo={
-            categoryName:categoryName,
-            categoryId:categoryId,
-            Yearofuse:data.Yearofuse,
-            Yearofpurchase:data.Yearofpurchase,
-            FuelType:data.FuelType,
-            condition:data.productCondition,
-            description:data.description,
-            Milage:data.Milage,
-            location:data.sellerLocation,
-            price:data.productOrginalPrice,
-            resalePrice:data.productResalePrice,
-            userInfo,
+        // const addProductInfo={
+        //     categoryName:categoryName,
+        //     categoryId:categoryId,
+        //     Yearofuse:data.Yearofuse,
+        //     Yearofpurchase:data.Yearofpurchase,
+        //     FuelType:data.FuelType,
+        //     condition:data.productCondition,
+        //     description:data.description,
+        //     Milage:data.Milage,
+        //     location:data.sellerLocation,
+        //     price:data.productOrginalPrice,
+        //     resalePrice:data.productResalePrice,
+        //     userInfo,
 
 
-        }
+        // }
        
        
 
         getImageUrl(image)
         .then(imgData=>{
           const addProductInfo={
+            name:data.productNames,
             categoryName:categoryName,
             categoryId:categoryId,
             Yearofuse:data.Yearofuse,
@@ -69,11 +81,27 @@ const AddAProducts = () => {
             price:data.productOrginalPrice,
             resalePrice:data.productResalePrice,
             imgUrl:imgData.data.display_url,
+            userRole:"seller",
+            time,
             userInfo,
-
-
         }
-        console.log("add a product",addProductInfo)
+        
+        fetch('http://localhost:5000/allCategoriesItemsCollection',{
+          method:'POST',
+          headers:{
+              'content-type': 'application/json'
+          },
+          body: JSON.stringify(addProductInfo)  
+      })
+      .then(res=>res.json())
+      .then(data=>{
+          if(data.acknowledged){
+              toast.success("CONGRATULATION !! THE ITEM IS BOOKED");
+             
+          }
+      })
+
+        // console.log("add a product",addProductInfo)
 
         });
        

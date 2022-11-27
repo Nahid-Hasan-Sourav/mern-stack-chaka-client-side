@@ -19,21 +19,21 @@ const SpecificCategoryItems = () => {
       .catch(err=>console.log("Error",err))
   },[user])
 
-    const data=useLoaderData()
-    console.log("SpecificCategoryItems",data)
+    const itemData=useLoaderData()
+    console.log("SpecificCategoryItems",itemData[0].categoryName)
     const [specificItemsData,setspecificItemsData]=useState(null)
     console.log("specificItemsData",specificItemsData)
     return (
        <div className='bg-gray-300 py-10'>
         <div className='p-6'>
         <h3 className='text-black font-bold text-3xl'>
-           Available Items For <span className='text-[#E22937]'>{data[0].categoryName}</span>
+           Available Items For <span className='text-[#E22937]'>{itemData[0].categoryName}</span>
         </h3>
-        <p className='mt-4 font-bold'>Total Results Found :<span className='text-[#E22937] mx-1'>{data.length}</span></p>
+        <p className='mt-4 font-bold'>Total Results Found :<span className='text-[#E22937] mx-1'>{itemData.length}</span></p>
         </div>
         <div className='grid lg:grid-cols-3 md:grid-cols-2 gap-6 p-4 my-8'>
          <>
-            {data.map((data)=>{
+            {itemData.map((data)=>{
                 return (
                   <div
                     className="card w-96 bg-base-100 shadow-xl"

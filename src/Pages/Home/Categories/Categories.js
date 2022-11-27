@@ -28,7 +28,7 @@ const Categories = () => {
                     <Link 
                     className="card bg-base-100 shadow-xl hover:bg-[#e9858e]" 
                     key={categorie._id}
-                    to={`/categorie/${categorie.categoryName}` }
+                    to={`/categorie/${categorie.categoryId}` }
                     >
                       <figure className="px-10 pt-10">
                         <img

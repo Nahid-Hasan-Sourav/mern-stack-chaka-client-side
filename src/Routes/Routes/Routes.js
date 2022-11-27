@@ -59,7 +59,9 @@ export const router = createBrowserRouter([
         element:<AddAProducts></AddAProducts>,
       },
       {
-        path: "/dashboard/seller/my-products",
+        path: "/dashboard/seller/my-products/:email",
+        // loader: ({ params }) =>
+        // fetch(`http://localhost:5000/dashboard/seller/my-products/${params.email}`),
         element:<MyProducts></MyProducts>,
       },
       {
