@@ -7,7 +7,7 @@ const BookingModal = ({specificItemsData,setspecificItemsData}) => {
 
   const {user}=useContext(AuthContext)
 
-  console.log("This is from booking modal",user)
+  console.log("This is from booking modal",specificItemsData)
 
     // const current = new Date();
     // // By default US English uses 12hr time with AM/PM
@@ -25,6 +25,7 @@ const BookingModal = ({specificItemsData,setspecificItemsData}) => {
 
     const handleSubmit =(e)=>{
         e.preventDefault()
+        // console.log("This is from booking modal",specificItemsData)
         const form=e.target
         const itemName=form.itemName.value;
         const userName=form.userName.value;
@@ -40,6 +41,7 @@ const BookingModal = ({specificItemsData,setspecificItemsData}) => {
             price,
             phoneNumber,
             meetingLocation,
+            productImage:specificItemsData.imgUrl,
             time,
             date
         }
