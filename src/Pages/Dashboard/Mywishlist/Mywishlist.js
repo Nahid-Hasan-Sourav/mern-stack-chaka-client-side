@@ -8,7 +8,7 @@ const Mywishlist = () => {
         queryKey: ["wish-list"],
         queryFn: async () => {
           const res = await fetch(
-            `http://localhost:5000/dashboard/wishlist/${router.email}`,
+            `https://a-12-chakka-server-side.vercel.app/dashboard/wishlist/${router.email}`,
             {
               method: "GET",
               headers: {
