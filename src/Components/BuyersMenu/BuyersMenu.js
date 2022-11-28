@@ -11,6 +11,13 @@ const BuyersMenu = () => {
              <Link to={`/dashboard/my-orders/${user.user.email}`}>
              My Orders
              </Link>
+            
+            </button>
+            <button className="btn block w-full my-4"  to='my-orders'>
+             <Link to={`/dashboard/wishlist/${user.user.email}`}>
+             My Wishlist
+             </Link>
+            
             </button>
         </div>
     );

@@ -1,14 +1,21 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
+import { setAuthToken } from '../Api/auth';
 import { getRole } from '../Api/UserRole';
 import Sidebar from '../Components/Dashboard/Sidebar';
 import { AuthContext } from '../contexts/AuthProvider/AuthProvider';
 
 const DashboardLayout = () => {
-    const {user}=useContext(AuthContext)
+    const {user,logOut}=useContext(AuthContext)
   const [userRole,setuserRole]=useState('')
 
   useEffect(()=>{
+    // if(user){
+    //   if(userRole!=='admin' || userRole!=='seller' || userRole!=='user'){
+    //     logOut()
+    //   }
+    // }
+    // setAuthToken(user,logOut)
       getRole(user?.email)
       .then((data)=>{
         console.log("User Role from sidebar :",data.role)

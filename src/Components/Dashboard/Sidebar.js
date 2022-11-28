@@ -8,6 +8,8 @@ import SellerMenu from '../SellerMenu/SellerMenu';
 import logo from '../../Logo/Chaka.png'
 const Sidebar = ({userRole}) => {
   const {user}=useContext(AuthContext)
+
+  console.log("sidebar",user);
  
     return (
     <div className='lg:w-64 px-4 bg-[#04224d] ' >

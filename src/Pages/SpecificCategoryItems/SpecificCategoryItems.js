@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import { getRole } from '../../Api/UserRole';
 import BookingModal from '../../Components/BookingModal/BookingModal';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 
 const SpecificCategoryItems = () => {
     const {user}=useContext(AuthContext)
-
+  console.log("object",user);
     const [userRole,setuserRole]=useState('')
 
   useEffect(()=>{
@@ -24,6 +24,48 @@ const SpecificCategoryItems = () => {
     console.log("SpecificCategoryItems",itemData)
     const [specificItemsData,setspecificItemsData]=useState(null)
     console.log("specificItemsData",specificItemsData)
+
+    const handleWishlist=(data)=>{
+      // alert("Wishlist");
+      console.log("Wish List",data);
+
+      const wishList={
+        email:user.email,
+        productName:data.name,
+        categoryName:data.categoryName,
+        productImage:data.imgUrl,
+        price:data.resalePrice,
+      }
+
+      fetch("http://localhost:5000/wish-list",
+        {
+          method: "PUT",
+          headers: {
+            "content-type": "application/json",
+            authorization: `bearer ${localStorage.getItem("chaka-token")}`,
+          },
+
+          body: JSON.stringify(wishList),
+        }
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.modifiedCount > 0) {
+            toast.success("CONGRATULATION !! PRODUCT IS ADDED IN WISH LIST");  
+          }
+          else{
+            toast.success("PRODUCT IS ALREADY ADEED IN YOUR WISH LIST");
+          }
+        });
+
+
+
+
+      // console.log("wish list product",wishList);
+    }
+
+
+
     return (
        <div className='bg-gray-300 py-10'>
         <div className='p-6'>
@@ -121,11 +163,19 @@ const SpecificCategoryItems = () => {
                         className="btn bg-[#E22937] fw-bold"
                         onClick={(e) => setspecificItemsData(data, e)}
                         disabled={
-                          userRole && userRole === "user" ? false : true
+                          userRole && userRole === "user"  ? false : true
                         }
                       >
                         Book Now
                       </label>
+                      <Link>
+                      <button className='btn btn-primary w-[100%]'  
+                       disabled={
+                        userRole && userRole === "user"   ? false : true
+                      }
+                      onClick={()=>handleWishlist(data)}
+                      >Add To My WishList</button>
+                      </Link>
                     </div>
                   </div>
                 );

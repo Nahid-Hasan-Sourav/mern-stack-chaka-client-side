@@ -5,7 +5,7 @@ import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import { GoogleAuthProvider } from 'firebase/auth';
 import { setAuthToken } from '../../Api/auth';
 const Login = () => {
-  const {signIn,providerLogin}=useContext(AuthContext)
+  const {signIn,providerLogin,logOut}=useContext(AuthContext)
   const [loginError,setloginError]=useState()
   const navigate = useNavigate()
   const location = useLocation();

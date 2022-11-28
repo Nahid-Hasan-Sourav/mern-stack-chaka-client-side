@@ -26,7 +26,7 @@ const Navbar = () => {
         </li>
         }
         <li className="text-black">
-          <Link to="/about" className='text-white'>About</Link>
+          <Link to="/blog" className='text-white'>Blog</Link>
         </li>
         {
           user?.uid ?

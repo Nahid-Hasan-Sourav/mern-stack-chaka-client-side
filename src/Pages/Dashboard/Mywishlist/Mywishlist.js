@@ -1,31 +1,30 @@
-import { useQuery } from "@tanstack/react-query";
-import { useParams } from "react-router-dom";
+import { useQuery } from '@tanstack/react-query';
+import React from 'react';
+import { useParams } from 'react-router-dom';
 
-const Myorders = () => {
-  const router = useParams();
-  console.log("This email is from my orders pages", router.email);
-
-  const { data: myProducts = [], refetch } = useQuery({
-    queryKey: ["my-products"],
-    queryFn: async () => {
-      const res = await fetch(
-        `https://a-12-chakka-server-side.vercel.app/buyers/my-products/${router.email}`,
-        {
-          method: "GET",
-          headers: {
-            "content-type": "application/json",
-            authorization: `bearer ${localStorage.getItem("chaka-token")}`,
-          },
-        }
-      );
-      const data = await res.json();
-      return data;
-    },
-  });
-
-  console.log("This is from my orders pages", myProducts);
-  return (
-    <div>
+const Mywishlist = () => {
+    const router= useParams();
+    const { data: myProducts = [], refetch } = useQuery({
+        queryKey: ["wish-list"],
+        queryFn: async () => {
+          const res = await fetch(
+            `http://localhost:5000/dashboard/wishlist/${router.email}`,
+            {
+              method: "GET",
+              headers: {
+                "content-type": "application/json",
+                authorization: `bearer ${localStorage.getItem("chaka-token")}`,
+              },
+            }
+          );
+          const data = await res.json();
+          return data;
+        },
+      });
+      console.log("")
+    return (
+        <div>
+            <div>
       <div className="overflow-x-auto w-full">
         <table className="table w-full">
           <thead>
@@ -34,6 +33,7 @@ const Myorders = () => {
               <th>Product Tille</th>
               <th>Price</th>
               <th>Payment</th>
+              <th>Delete</th>
             </tr>
           </thead>
           <tbody>
@@ -49,11 +49,14 @@ const Myorders = () => {
                       </div>
                     </div>
                   </td>
-                  <td>{data.itemName}</td>
+                  <td>{data.productName}</td>
                   <td>{data.price}</td>
 
                   <th>
                     <button className="btn btn-ghost btn-xs">Payment</button>
+                  </th>
+                  <th>
+                    <button className="btn btn-ghost btn-xs">Delete</button>
                   </th>
                 </tr>
               );
@@ -62,7 +65,8 @@ const Myorders = () => {
         </table>
       </div>
     </div>
-  );
+        </div>
+    );
 };
 
-export default Myorders;
+export default Mywishlist;
