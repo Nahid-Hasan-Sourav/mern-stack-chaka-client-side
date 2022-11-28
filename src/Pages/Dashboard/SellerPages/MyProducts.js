@@ -40,12 +40,12 @@ const MyProducts = () => {
             // alert("Delete btn")
     }
 
-    const handleAdvertise=(e,data)=>{
+    const handleAdvertise=(data)=>{
         alert("Advertise button is working")
-        console.log("This is for advertise from My Products",e)
+        console.log("This is for advertise from My Products",data)
 
         fetch('http://localhost:5000/advertiseProductCollection',{
-            method:'PUT',
+            method:'post',
             headers:{
                 'content-type': 'application/json'
             },

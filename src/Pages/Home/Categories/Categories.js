@@ -5,7 +5,7 @@ import LoadingSpinner from '../../../Components/LoadingSpinner/LoadingSpinner';
 
 const Categories = () => {
     const { data: Categories = [], isLoading } = useQuery({
-        queryKey: ['appointmentOptions'],
+        queryKey: ['categories'],
         queryFn: async () => {
             const res = await fetch(`http://localhost:5000/categories`);
             const data = await res.json();
