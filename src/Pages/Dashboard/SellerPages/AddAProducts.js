@@ -3,15 +3,17 @@ import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import { useForm } from "react-hook-form";
 import { getImageUrl, getUpload } from '../../../Api/imageUpload';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 const AddAProducts = () => {
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const {user}=useContext(AuthContext)
-  
+    const navigate=useNavigate()
 
     const handleAddProductSubmit=(data)=>{
       const image=data.productImage[0]
       console.log("check image for add book",image)
+      console.log("All form data from add a products ",data)
      
     
       var today = new Date();
@@ -23,6 +25,7 @@ const AddAProducts = () => {
         today.getDate();
       var time =
         today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+       
 
         const userInfo={
             userName:user.displayName,
@@ -68,7 +71,7 @@ const AddAProducts = () => {
         getImageUrl(image)
         .then(imgData=>{
           const addProductInfo={
-            name:data.productNames,
+            name:data.name,
             categoryName:categoryName,
             categoryId:categoryId,
             Yearofuse:data.Yearofuse,
@@ -83,9 +86,10 @@ const AddAProducts = () => {
             imgUrl:imgData.data.display_url,
             userRole:"seller",
             time,
+            date,
             userInfo,
         }
-        
+        // console.log("Added Producy from adda products",addProductInfo)
         fetch('http://localhost:5000/allCategoriesItemsCollection',{
           method:'POST',
           headers:{
@@ -96,8 +100,8 @@ const AddAProducts = () => {
       .then(res=>res.json())
       .then(data=>{
           if(data.acknowledged){
-              toast.success("CONGRATULATION !! THE ITEM IS BOOKED");
-             
+              toast.success("CONGRATULATION !! PRODUCT IS ADDED SUCCESSFULLY");
+              navigate(`/dashboard/seller/my-products/${user.email}`)
           }
       })
 
@@ -132,7 +136,7 @@ const AddAProducts = () => {
                 className="input input-bordered"
               />
             </div>
-            <div className="form-control">
+           <div className="form-control">
                 <label htmlFor="image" className="block mb-2 text-sm">
                   Product Image:
                 </label>
@@ -145,6 +149,7 @@ const AddAProducts = () => {
                
                 />
               </div>
+               
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Orginal Price</span>

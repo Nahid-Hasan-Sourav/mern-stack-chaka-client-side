@@ -3,6 +3,7 @@ import DownloadBrochure from '../DownloadBrochure/DownloadBrochure';
 import Banner from '../Banner/Banner';
 import Categories from '../Categories/Categories';
 import WhyTrust from '../WhyTrust/WhyTrust';
+import Advertise from '../Advertise/Advertise';
 
 const Home = () => {
     return (
@@ -28,6 +29,13 @@ const Home = () => {
           <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-6 p-4 my-8">
             <Categories></Categories>
           </div>
+        </section>
+
+        <section>
+          <div>
+            <h2 className='text-[#E22937] font-bold text-3xl my-8'>Advertise Product</h2>
+          </div>
+          <Advertise></Advertise>
         </section>
 
         <section>

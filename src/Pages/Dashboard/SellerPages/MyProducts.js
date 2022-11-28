@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { useLoaderData, useParams } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import { MdDelete } from 'react-icons/md';
@@ -6,7 +6,11 @@ import toast from 'react-hot-toast';
 const MyProducts = () => {
     const {user}=useContext(AuthContext)
     const [allProducts,setallProducts]=useState()
+    console.log("All products",allProducts)
     const [refresh,setRefresh] = useState(false)
+    const [btnDisabled,setbtnDisabled]=useState(false)
+    const buttonRef = useRef();
+
     const router=useParams();
     console.log("my products",router)
     useEffect(()=>{
@@ -14,7 +18,7 @@ const MyProducts = () => {
         .then(res=>res.json())
         .then(data=>{
             setallProducts(data)
-            setRefresh(true)
+            
         })
         .catch(err=>console.log(err));
     },[refresh])
@@ -28,18 +32,46 @@ const MyProducts = () => {
             .then(data => {
                 if (data.deletedCount > 0){
                     toast.success("Deleted Successfully")
+                    setRefresh(!refresh)
                 }
             })
             .catch(err => {console.log("Delete roducts error",err)})
 
             // alert("Delete btn")
     }
+
+    const handleAdvertise=(e,data)=>{
+        alert("Advertise button is working")
+        console.log("This is for advertise from My Products",e)
+
+        fetch('http://localhost:5000/advertiseProductCollection',{
+            method:'PUT',
+            headers:{
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(data)  
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            if(data.acknowledged){
+                toast.success("CONGRATULATION !! YOUR PRODUCT IS ADDED FOR ADVERTISE");
+                buttonRef.current.disabled = true; 
+               
+            }
+        })
+
+
+
+       
+        // e.currentTarget.disabled=true;
+    }
+
     return (
-        <div className="overflow-x-auto">
+        <div>
+            <div className="overflow-x-auto">
   <table className="table table-compact w-full">
     <thead>
-      <tr>
-      
+      <tr> 
         <th className='text-center'>Product Name</th> 
         <th className='text-center'>Product Category</th> 
         <th className='text-center'>Price</th> 
@@ -50,16 +82,20 @@ const MyProducts = () => {
     </thead> 
     <tbody>
       
-      {/* <tr>
-        <th>18</th> 
-        <td>Aland Wilber</td> 
-        <td>Quality Control Specialist</td> 
-        <td>Kshlerin, Rogahn and Swaniawski</td> 
-        <td>Czech Republic</td> 
-        <td>9/29/2020</td> 
-        <td>Purple</td>
-      </tr> */}
-      {
+     {
+        allProducts?.length===0 ?
+        <>
+        <div className='w-[100%]'>
+        {/* <h2 className='font-bold text-center'>Sorry You have no products</h2> */}
+        <marquee className='block'><h2 className='font-bold text-center text-3xl text-red-700'>Sorry You have no products</h2></marquee>
+        </div>
+        </>
+
+        :
+
+        <>
+        
+        {
         allProducts?.map((data)=>{
             return(
                 <>
@@ -77,12 +113,14 @@ const MyProducts = () => {
                         Available
                     </th>
                     <th className='text-center'>
-                        <button className='text-red-700'>
+                        <button className='text-red-700 btn' onClick={()=>handleAdvertise(data)}>
                             Advertised
                         </button>
                     </th>
                     <th className='text-center'>
-                   <button onClick={()=>handleDelete(data._id)}>
+                   <button onClick={()=>handleDelete(data._id)}
+                   ref={buttonRef}
+                   >
                    <MdDelete className='inline text-3xl text-red-700'></MdDelete>
                    </button>
                     </th>
@@ -91,11 +129,14 @@ const MyProducts = () => {
             )
         })
       }
+        </>
+     }
       
     </tbody> 
    
   </table>
-</div>
+        </div>
+        </div>
     );
 };
 
