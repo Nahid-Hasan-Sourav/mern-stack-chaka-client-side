@@ -1,14 +1,26 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import { useForm } from "react-hook-form";
 import { getImageUrl, getUpload } from '../../../Api/imageUpload';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import { getRole } from '../../../Api/UserRole';
 
 const AddAProducts = () => {
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const {user}=useContext(AuthContext)
     const navigate=useNavigate()
+
+    const [sellerStatus,setsellerStatus]=useState('')
+
+  useEffect(()=>{
+      getRole(user?.email)
+      .then((data)=>{
+        console.log("User Role from sidebar :",data.sellerStatus)
+        setsellerStatus(data.sellerStatus)
+      })
+      .catch(err=>console.log("Error",err))
+  },[user])
 
     const handleAddProductSubmit=(data)=>{
       const image=data.productImage[0]
@@ -84,7 +96,7 @@ const AddAProducts = () => {
             price:data.productOrginalPrice,
             resalePrice:data.productResalePrice,
             imgUrl:imgData.data.display_url,
-            userRole:"seller",
+            sellerStatus,
             time,
             date,
             userInfo,

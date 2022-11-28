@@ -3,25 +3,37 @@ import { useLoaderData, useParams } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import { MdDelete } from 'react-icons/md';
 import toast from 'react-hot-toast';
+import { useQuery } from '@tanstack/react-query';
 const MyProducts = () => {
     const {user}=useContext(AuthContext)
-    const [allProducts,setallProducts]=useState()
-    console.log("All products",allProducts)
+    // const [allProducts,setallProducts]=useState()
+    // console.log("All products",allProducts)
     const [refresh,setRefresh] = useState(false)
-    const [btnDisabled,setbtnDisabled]=useState(false)
+    // const [btnDisabled,setbtnDisabled]=useState(false)
     const buttonRef = useRef();
 
     const router=useParams();
-    console.log("my products",router)
-    useEffect(()=>{
-        fetch(`http://localhost:5000/dashboard/seller/my-products/${router.email}`)
-        .then(res=>res.json())
-        .then(data=>{
-            setallProducts(data)
+    // console.log("my products",router)
+    // useEffect(()=>{
+    //     fetch(`http://localhost:5000/dashboard/seller/my-products/${router.email}`)
+    //     .then(res=>res.json())
+    //     .then(data=>{
+    //         setallProducts(data)
             
-        })
-        .catch(err=>console.log(err));
-    },[refresh])
+    //     })
+    //     .catch(err=>console.log(err));
+    // },[refresh])
+
+
+    const { data: allProducts = [],refetch} = useQuery({
+        queryKey: ['my-products'],
+        queryFn: async () => {
+            const res = await fetch(`http://localhost:5000/dashboard/seller/my-products/${router.email}`);
+            const data = await res.json();
+            return data
+        }
+
+    });
 
     const handleDelete=(id)=>{
         console.log("id",id)
@@ -32,7 +44,8 @@ const MyProducts = () => {
             .then(data => {
                 if (data.deletedCount > 0){
                     toast.success("Deleted Successfully")
-                    setRefresh(!refresh)
+                    refetch()
+                    // setRefresh(!refresh)
                 }
             })
             .catch(err => {console.log("Delete roducts error",err)})
@@ -68,7 +81,7 @@ const MyProducts = () => {
 
     return (
         <div>
-            <div className="overflow-x-auto">
+              <div className="overflow-x-auto">
   <table className="table table-compact w-full">
     <thead>
       <tr> 
@@ -86,7 +99,7 @@ const MyProducts = () => {
         allProducts?.length===0 ?
         <>
         <div className='w-[100%]'>
-        {/* <h2 className='font-bold text-center'>Sorry You have no products</h2> */}
+      
         <marquee className='block'><h2 className='font-bold text-center text-3xl text-red-700'>Sorry You have no products</h2></marquee>
         </div>
         </>
@@ -100,30 +113,30 @@ const MyProducts = () => {
             return(
                 <>
                 <tr>
-                    <th className='text-center'>
+                    <td className='text-center'>
                         {data.name}
-                    </th>
-                    <th className='text-center'>
+                    </td>
+                    <td className='text-center'>
                         {data.categoryName}
-                    </th>
-                    <th className='text-center'>
+                    </td>
+                    <td className='text-center'>
                        {data.price}
-                    </th>
-                    <th className='text-center'>
+                    </td>
+                    <td className='text-center'>
                         Available
-                    </th>
-                    <th className='text-center'>
-                        <button className='text-red-700 btn' onClick={()=>handleAdvertise(data)}>
+                    </td>
+                    <td className='text-center'>
+                        <button className='text-red-700 btn btn-ghost btn-xs' onClick={()=>handleAdvertise(data)}>
                             Advertised
                         </button>
-                    </th>
-                    <th className='text-center'>
+                    </td>
+                    <td className='text-center'>
                    <button onClick={()=>handleDelete(data._id)}
                    ref={buttonRef}
                    >
                    <MdDelete className='inline text-3xl text-red-700'></MdDelete>
                    </button>
-                    </th>
+                    </td>
                 </tr>
                 </>
             )
@@ -135,7 +148,7 @@ const MyProducts = () => {
     </tbody> 
    
   </table>
-        </div>
+              </div>
         </div>
     );
 };

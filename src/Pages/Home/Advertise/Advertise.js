@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import LoadingSpinner from '../../../Components/LoadingSpinner/LoadingSpinner';
 import ProductCard from '../../../Components/ProductCard/ProductCard';
+import { FaCheckCircle } from 'react-icons/fa';
 
 const Advertise = () => {
     const { data: itemData = [], isLoading } = useQuery({
@@ -21,6 +22,13 @@ const Advertise = () => {
     // }
     return (
         <>
+       {
+        itemData?.length>0 ?
+        <>
+         <div>
+            <div>
+            <h2 className='text-[#E22937] font-bold text-3xl my-8'>Advertise Product</h2>
+          </div>
             <div className='grid lg:grid-cols-3 md:grid-cols-2 gap-6 p-4 my-8'>
          <>
             {itemData.map((data)=>{
@@ -93,7 +101,17 @@ const Advertise = () => {
                               {data?.userInfo?.userName}
                             </div>
                             <div className="text-sm opacity-50">
-                              {data.userRole}
+                             {
+                             data?.sellerStatus ? 
+                             <button className='btn btn-[#808080] btn-xs'>
+                                   <FaCheckCircle className='text-success inline'></FaCheckCircle>
+                                   <span className='mx-2 text-success '>  {data.sellerStatus}</span>  
+                             </button>
+                             :
+                             <button className='btn btn-[#808080] btn-xs'>UNVERIFIED</button>
+                            }
+
+                            
                             </div>
                           </div>
                         </div>
@@ -120,8 +138,13 @@ const Advertise = () => {
                 );
             })}
         </>
-       </div>
+            </div>
+        </div>
         </>
+
+        :""
+       }
+       </>
     );
 };
 

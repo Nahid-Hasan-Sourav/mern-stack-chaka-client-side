@@ -9,7 +9,7 @@ const AdminMenu = () => {
                All Sellers
              </Link>          
             </button>
-             <button className="btn block w-full"  to='my-orders'>
+             <button className="btn block w-full my-4"  to='my-orders'>
              <Link to='/dashboard/admin/All-Buyers'>
               All Buyers
              </Link>      

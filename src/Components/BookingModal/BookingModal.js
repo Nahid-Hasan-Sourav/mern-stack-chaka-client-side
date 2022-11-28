@@ -96,7 +96,7 @@ const BookingModal = ({specificItemsData,setspecificItemsData}) => {
                         type="text"
                         disabled
                         name='userName'
-                        value={`User Name : Mnjvjh `}
+                        value={user?.displayName}
                         className="input input-bordered"
                       />
                     </div>
@@ -106,7 +106,7 @@ const BookingModal = ({specificItemsData,setspecificItemsData}) => {
                         disabled
                         name='email'
                         type="email"
-                        value={`bbbbbb@gmail.com`}
+                        value={user?.email}
                         className="input input-bordered"
                       />
                     </div>

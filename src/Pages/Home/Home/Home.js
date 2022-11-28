@@ -32,9 +32,7 @@ const Home = () => {
         </section>
 
         <section>
-          <div>
-            <h2 className='text-[#E22937] font-bold text-3xl my-8'>Advertise Product</h2>
-          </div>
+          
           <Advertise></Advertise>
         </section>
 
