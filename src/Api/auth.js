@@ -11,7 +11,7 @@ export const setAuthToken = (user) => {
     image: user.image,
   };
 
-  console.log("This is from auth", currentUser);
+  console.log("This is from auth function", currentUser);
 
   // save user in db and get the token
   fetch(`https://a-12-chakka-server-side.vercel.app/user/${user.email}`, {
@@ -27,7 +27,7 @@ export const setAuthToken = (user) => {
   })
     .then((res) => res.json())
     .then((data) => {
-      console.log("This is from auth.js ", data);
+      console.log("This is from auth.js function", data);
       // if(data.message==='Forbidden access' || data.message==='unauthorized access'){
       //     logOut();
       // }

@@ -5,7 +5,7 @@
 
 # About Project 
 
-- This is a second hand car selling web site. In this project I am using tailwind css,daisy ui ,react-router-dom,react-icons,toast etc
+- This is a second hand car selling,buyong web site. In this project I am using tailwind css,daisy ui ,react-router-dom,react-icons,toast etc
 
 - when a user will sign in there will two option seller / user
 - seller can add products afetr adding product he can see his productd my product option

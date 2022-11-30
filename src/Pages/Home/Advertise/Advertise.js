@@ -41,10 +41,7 @@ const Advertise = () => {
               <>
                 {itemData.map((data) => {
                   return (
-                    <div
-                      className="card w-96 bg-base-100 shadow-xl"
-                      key={data._id}
-                    >
+                    <div className="card bg-base-100 shadow-xl" key={data._id}>
                       <figure>
                         <img src={data.imgUrl} alt="Shoes" />
                       </figure>

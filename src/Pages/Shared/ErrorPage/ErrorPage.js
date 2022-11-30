@@ -30,6 +30,8 @@ const ErrorPage = () => {
         </div>
       </div>
     </section>
+    
+
   )
 }
 

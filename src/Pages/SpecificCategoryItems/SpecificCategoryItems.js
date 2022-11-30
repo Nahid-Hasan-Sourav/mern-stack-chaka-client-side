@@ -15,6 +15,7 @@ const SpecificCategoryItems = () => {
       .then((data) => {
         console.log("User Role from sidebar :", data.role);
         setuserRole(data.role);
+        console.log("data.role", data.role);
       })
       .catch((err) => console.log("Error", err));
   }, [user]);
@@ -27,7 +28,7 @@ const SpecificCategoryItems = () => {
 
   const handleWishlist = (data) => {
     // alert("Wishlist");
-    console.log("Wish List", data);
+    // console.log("Wish List", data);
 
     const wishList = {
       email: user.email,
@@ -35,10 +36,11 @@ const SpecificCategoryItems = () => {
       categoryName: data.categoryName,
       productImage: data.imgUrl,
       price: data.resalePrice,
+      // id: data._id,
     };
 
     fetch("https://a-12-chakka-server-side.vercel.app/wish-list", {
-      method: "PUT",
+      method: "POST",
       headers: {
         "content-type": "application/json",
         authorization: `bearer ${localStorage.getItem("chaka-token")}`,
@@ -48,10 +50,12 @@ const SpecificCategoryItems = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.modifiedCount > 0) {
+        console.log("wish list product", data);
+        if (data.acknowledged === true) {
           toast.success("CONGRATULATION !! PRODUCT IS ADDED IN WISH LIST");
+          console.log("wish list product", data);
         } else {
-          toast.success("PRODUCT IS ALREADY ADEED IN YOUR WISH LIST");
+          toast.error("PRODUCT IS ALREADY ADEED IN YOUR WISH LIST");
         }
       });
 

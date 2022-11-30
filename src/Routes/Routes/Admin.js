@@ -1,15 +1,72 @@
-import React, { useContext, useState } from 'react';
+// import React, { useContext, useEffect, useState } from 'react';
+// import { Navigate } from 'react-router-dom';
+// import { getRole } from '../../Api/UserRole';
+// import LoadingSpinner from '../../Components/LoadingSpinner/LoadingSpinner';
+// import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
+
+// const Admin = ({children}) => {
+//     const {user,loading}=useContext(AuthContext);
+//     const [role,setRole]=useState(null)
+//     const [roleLoading,setRoleLoading] = useState(true)
+//     useEffect(()=>{
+//         setRoleLoading(true)
+//         getRole(user?.email).then(data=>{
+//             console.log("Admin CVheck",data.role)
+//             setRole(data.role)
+//             console.log("Admin route",data.role)
+//             setRoleLoading(false)
+//         })
+//     },[user])
+//     if(loading || roleLoading){
+//         return(
+//             <LoadingSpinner></LoadingSpinner>
+//         )
+//     }
+
+//     if(user && user.uid && role === 'admin' ){
+        
+//         return children
+//     }
+//     if(roleLoading===false){
+//         return <Navigate to='/dashboard'></Navigate>
+//     }
+
+  
+// };
+
+// export default Admin;
+
+import React, { useContext, useEffect, useState } from 'react';
+import { Navigate } from 'react-router-dom';
+import { getRole } from '../../Api/UserRole';
+import LoadingSpinner from '../../Components/LoadingSpinner/LoadingSpinner';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 
-const Admin = ({children}) => {
+const SellerRoute = ({children}) => {
     const {user,loading}=useContext(AuthContext);
-    const {role,setRole}=useState(null)
-    const [role]
-    return (
-        <div>
-            
-        </div>
-    );
+    const [role,setRole]=useState(null)
+    const [roleLoading,setRoleLoading] = useState(true)
+    useEffect(()=>{
+        setRoleLoading(true)
+        getRole(user?.email).then(data=>{
+            setRole(data.role)
+            setRoleLoading(false)
+        })
+    },[user])
+    if(loading || roleLoading){
+        return(
+            <LoadingSpinner></LoadingSpinner>
+        )
+    }
+
+    if(user && user.uid && role === 'admin' ){
+        
+        return children
+    }
+    if(roleLoading===false){
+        return <Navigate to='/dashboard'></Navigate>
+    }
+
 };
 
-export default Admin;
+export default SellerRoute;

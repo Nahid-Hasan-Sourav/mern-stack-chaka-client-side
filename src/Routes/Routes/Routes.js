@@ -12,9 +12,13 @@ import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
 import ErrorPage from "../../Pages/Shared/ErrorPage/ErrorPage";
 import SignUp from "../../Pages/SignUp/SignUp";
-import Blog from '../../Pages/Blog/Blog'
+import Blog from "../../Pages/Blog/Blog";
 import SpecificCategoryItems from "../../Pages/SpecificCategoryItems/SpecificCategoryItems";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import Admin from "./Admin";
+import SellerRoute from "./SellerRoute";
+import Buyers from "./Buyers";
+import Payments from "../../Pages/Dashboard/Payments/Payments";
 
 export const router = createBrowserRouter([
   {
@@ -49,7 +53,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "blog",
-        element:<Blog></Blog>
+        element: <Blog></Blog>,
       },
     ],
   },
@@ -65,17 +69,17 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/my-orders/:email",
         element: (
-          <PrivateRoute>
+          <Buyers>
             <Myorders></Myorders>
-          </PrivateRoute>
+          </Buyers>
         ),
       },
       {
         path: "/dashboard/seller/add-a-products",
         element: (
-          <PrivateRoute>
+          <SellerRoute>
             <AddAProducts></AddAProducts>
-          </PrivateRoute>
+          </SellerRoute>
         ),
       },
       {
@@ -83,30 +87,44 @@ export const router = createBrowserRouter([
         // loader: ({ params }) =>
         // fetch(`https://a-12-chakka-server-side.vercel.app/dashboard/seller/my-products/${params.email}`),
         element: (
-          <PrivateRoute>
+          <SellerRoute>
             <MyProducts></MyProducts>
-          </PrivateRoute>
+          </SellerRoute>
         ),
       },
-      {
-        path: "/dashboard/seller/my-products",
-        element: (
-          <PrivateRoute>
-            <MyBuyers></MyBuyers>
-          </PrivateRoute>
-        ),
-      },
+
       {
         path: "/dashboard/admin/All-Sellers",
-        element: <AllSellers></AllSellers>,
+        element: (
+          <Admin>
+            <AllSellers></AllSellers>
+          </Admin>
+        ),
       },
       {
         path: "/dashboard/wishlist/:email",
-        element: <Mywishlist></Mywishlist>,
+        element: (
+          <Buyers>
+            <Mywishlist></Mywishlist>
+          </Buyers>
+        ),
+        // element:<PrivateRoute> <Mywishlist></Mywishlist></PrivateRoute>
       },
       {
         path: "/dashboard/admin/All-Buyers",
-        element: <AllBuyers></AllBuyers>,
+        element: (
+          <Admin>
+            <AllBuyers></AllBuyers>
+          </Admin>
+        ),
+      },
+      {
+        path: "/dashboard/payment/:id",
+        loader: ({ params }) =>
+          fetch(
+            `https://a-12-chakka-server-side.vercel.app/bookings/${params.id}`
+          ),
+        element: <Payments></Payments>,
       },
     ],
   },

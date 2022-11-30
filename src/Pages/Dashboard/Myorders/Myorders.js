@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const Myorders = () => {
   const router = useParams();
@@ -52,8 +52,16 @@ const Myorders = () => {
                   <td>{data.itemName}</td>
                   <td>{data.price}</td>
 
-                  <th>
-                    <button className="btn btn-ghost btn-xs">Payment</button>
+                  <th>{
+                    data.transactionId ?  <button className="btn btn-xs btn-success "
+                   
+                    >Payment</button> :
+                    <Link to={`/dashboard/payment/${data._id}`}>
+                    <button className="btn btn-xs btn-warning">Pay</button> 
+                   </Link>
+                    
+                    }
+                   
                   </th>
                 </tr>
               );

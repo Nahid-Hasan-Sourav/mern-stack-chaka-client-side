@@ -53,6 +53,11 @@ const BookingModal = ({ specificItemsData, setspecificItemsData }) => {
       .then((data) => {
         if (data.acknowledged) {
           toast.success("CONGRATULATION !! THE ITEM IS BOOKED");
+          console.log("Booking MOdal",data)
+        }
+        else{
+          toast.error("Already Booked!!!");
+          // alert("Booked")
         }
       });
 

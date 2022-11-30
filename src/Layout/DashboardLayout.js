@@ -20,6 +20,9 @@ const DashboardLayout = () => {
       .then((data)=>{
         console.log("User Role from sidebar :",data.role)
         setuserRole(data.role)
+        if(data.role==null && user){
+          logOut()
+        }
       })
       .catch(err=>console.log("Error",err))
   },[user])

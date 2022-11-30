@@ -164,7 +164,7 @@ const AddAProducts = () => {
               </label>
               <input
                 {...register("productOrginalPrice", { required: true })}
-                type="text"
+                type="number"
                 placeholder="Orginal price"
                 name="productOrginalPrice"
                 className="input input-bordered"
@@ -175,7 +175,7 @@ const AddAProducts = () => {
                 <span className="label-text">Resale Price</span>
               </label>
               <input
-                type="text"
+                type="number"
                 placeholder="Resale price"
                 name="productResalePrice"
                 className="input input-bordered"

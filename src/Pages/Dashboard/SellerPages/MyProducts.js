@@ -4,6 +4,7 @@ import { AuthContext } from "../../../contexts/AuthProvider/AuthProvider";
 import { MdDelete } from "react-icons/md";
 import toast from "react-hot-toast";
 import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 const MyProducts = () => {
   const { user } = useContext(AuthContext);
   // const [allProducts,setallProducts]=useState()
@@ -69,29 +70,59 @@ const MyProducts = () => {
   };
 
   const handleAdvertise = (data) => {
-    alert("Advertise button is working");
+    // alert("Advertise button is working");
     console.log("This is for advertise from My Products", data);
 
-    fetch(
-      "https://a-12-chakka-server-side.vercel.app/advertiseProductCollection",
-      {
-        method: "post",
-        headers: {
-          "content-type": "application/json",
-          authorization: `bearer ${localStorage.getItem("chaka-token")}`,
-        },
-        body: JSON.stringify(data),
-      }
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.acknowledged) {
+    axios
+      .post(
+        `https://a-12-chakka-server-side.vercel.app/advertiseProductCollection`,
+        {
+          method: "post",
+          headers: {
+            "content-type": "application/json",
+            authorization: `bearer ${localStorage.getItem("chaka-token")}`,
+          },
+          body: JSON.stringify(data),
+        }
+      )
+      .then(function (data) {
+        if (data.acknowledged === true) {
           toast.success(
             "CONGRATULATION !! YOUR PRODUCT IS ADDED FOR ADVERTISE"
           );
-          buttonRef.current.disabled = true;
+        } else {
+          toast.error("This item is already available for advertise");
         }
-      });
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+      .finally(function () {});
+
+    // fetch(
+    //   "https://a-12-chakka-server-side.vercel.app/advertiseProductCollection",
+    //   {
+    //     method: "post",
+    //     headers: {
+    //       "content-type": "application/json",
+    //       authorization: `bearer ${localStorage.getItem("chaka-token")}`,
+    //     },
+    //     body: JSON.stringify(data),
+    //   }
+    // )
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     if (data.acknowledged===true) {
+    //       toast.success(
+    //         "CONGRATULATION !! YOUR PRODUCT IS ADDED FOR ADVERTISE"
+    //       );
+
+    //     }
+    //     else{
+    //         toast.error("This item is already available for advertise")
+    //     }
+
+    //   });
 
     // e.currentTarget.disabled=true;
   };
@@ -130,7 +161,13 @@ const MyProducts = () => {
                         <td className="text-center">{data.name}</td>
                         <td className="text-center">{data.categoryName}</td>
                         <td className="text-center">{data.price}</td>
-                        <td className="text-center">Available</td>
+                        <td className="text-center">
+                          {data.sellStatus ? (
+                            <p className="font-bold">Sold</p>
+                          ) : (
+                            <p className="font-bold ">Availabe</p>
+                          )}
+                        </td>
                         <td className="text-center">
                           <button
                             className="text-red-700 btn btn-ghost btn-xs"

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { getRole } from '../../Api/UserRole';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import AdminMenu from '../AdminMenu/AdminMenu';
@@ -7,9 +7,15 @@ import BuyersMenu from '../BuyersMenu/BuyersMenu';
 import SellerMenu from '../SellerMenu/SellerMenu';
 import logo from '../../Logo/Chaka.png'
 const Sidebar = ({userRole}) => {
-  const {user}=useContext(AuthContext)
+  const {user,logOut}=useContext(AuthContext)
+  const navigate=useNavigate()
 
   console.log("sidebar",user);
+
+  const handleLogout=()=>{
+    logOut()
+    navigate('/')
+  }
  
     return (
     <div className='lg:w-64 px-4 bg-[#04224d] ' >
@@ -26,7 +32,7 @@ const Sidebar = ({userRole}) => {
         />
         <h4 class="mx-2 mt-2 font-medium  fw-bold hover:underline text-white">{user?.displayName}</h4>
         <p class="mx-2 mt-1 text-sm font-medium text-white hover:underline">{user?.email}</p>
-        <p class="mx-2 mt-1 text-sm font-medium text-white hover:underline">User Type : {userRole}</p>
+        <p class="mx-2 mt-1 text-sm font-medium text-white hover:underline">User Type : {userRole==='user' ? 'Buyer' : userRole}</p>
         {/* <div className="flex flex-col  mt-6 justify-evenly">
           <Link to='/' className="btn bg-[#E22937] text-white font-bold" type='submit'>Go to home</Link>
                      
@@ -38,6 +44,8 @@ const Sidebar = ({userRole}) => {
         {
           userRole && userRole==='seller' ? <SellerMenu></SellerMenu> : userRole && userRole==='user' ? <BuyersMenu></BuyersMenu> : userRole && userRole==='admin' ? <AdminMenu></AdminMenu> : ''
         }
+
+        <button className='btn bg-[#E22937] block w-[100%] mt-10' onClick={()=>handleLogout()}>Logout</button>
         </nav>
      </div>
    </div>
