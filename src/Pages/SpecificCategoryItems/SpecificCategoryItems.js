@@ -25,10 +25,10 @@ const SpecificCategoryItems = () => {
   console.log("SpecificCategoryItems", itemData);
   const [specificItemsData, setspecificItemsData] = useState(null);
   console.log("specificItemsData", specificItemsData);
-
+  console.log("Item Data",itemData)
   const handleWishlist = (data) => {
     // alert("Wishlist");
-    // console.log("Wish List", data);
+    console.log("Wish List", itemData);
 
     const wishList = {
       email: user.email,
@@ -77,7 +77,9 @@ const SpecificCategoryItems = () => {
       <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-6 p-4 my-8">
         <>
           {itemData.map((data) => {
+            console.log("This is ",data)
             return (
+              
               <div className="card w-96 bg-base-100 shadow-xl" key={data._id}>
                 <figure>
                   <img src={data.imgUrl} alt="Shoes" />

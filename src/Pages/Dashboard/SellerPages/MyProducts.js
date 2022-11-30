@@ -73,56 +73,56 @@ const MyProducts = () => {
     // alert("Advertise button is working");
     console.log("This is for advertise from My Products", data);
 
-    axios
-      .post(
-        `https://a-12-chakka-server-side.vercel.app/advertiseProductCollection`,
-        {
-          method: "post",
-          headers: {
-            "content-type": "application/json",
-            authorization: `bearer ${localStorage.getItem("chaka-token")}`,
-          },
-          body: JSON.stringify(data),
-        }
-      )
-      .then(function (data) {
-        if (data.acknowledged === true) {
-          toast.success(
-            "CONGRATULATION !! YOUR PRODUCT IS ADDED FOR ADVERTISE"
-          );
-        } else {
-          toast.error("This item is already available for advertise");
-        }
-      })
-      .catch(function (error) {
-        console.log(error);
-      })
-      .finally(function () {});
-
-    // fetch(
-    //   "https://a-12-chakka-server-side.vercel.app/advertiseProductCollection",
-    //   {
-    //     method: "post",
-    //     headers: {
-    //       "content-type": "application/json",
-    //       authorization: `bearer ${localStorage.getItem("chaka-token")}`,
-    //     },
-    //     body: JSON.stringify(data),
-    //   }
-    // )
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     if (data.acknowledged===true) {
+    // axios
+    //   .post(
+    //     `https://a-12-chakka-server-side.vercel.app/advertiseProductCollection`,
+    //     {
+    //       method: "post",
+    //       headers: {
+    //         "content-type": "application/json",
+    //         authorization: `bearer ${localStorage.getItem("chaka-token")}`,
+    //       },
+    //       body: JSON.stringify(data),
+    //     }
+    //   )
+    //   .then(function (data) {
+    //     if (data.acknowledged === true) {
     //       toast.success(
     //         "CONGRATULATION !! YOUR PRODUCT IS ADDED FOR ADVERTISE"
     //       );
-
+    //     } else {
+    //       toast.error("This item is already available for advertise");
     //     }
-    //     else{
-    //         toast.error("This item is already available for advertise")
-    //     }
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   })
+    //   .finally(function () {});
 
-    //   });
+    fetch(
+      "https://a-12-chakka-server-side.vercel.app/advertiseProductCollection",
+      {
+        method: "post",
+        headers: {
+          "content-type": "application/json",
+          authorization: `bearer ${localStorage.getItem("chaka-token")}`,
+        },
+        body: JSON.stringify(data),
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.acknowledged===true) {
+          toast.success(
+            "CONGRATULATION !! YOUR PRODUCT IS ADDED FOR ADVERTISE"
+          );
+
+        }
+        else{
+            toast.error("This item is already available for advertise")
+        }
+
+      });
 
     // e.currentTarget.disabled=true;
   };
