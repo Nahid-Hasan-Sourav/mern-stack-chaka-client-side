@@ -1,8 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import car from '../../../Assets/car.png'
+import car2 from '../../../Assets/car-blue-2.png'
 import bg from '../../../Assets/slider_bg.png'
 
+
+
 const Banner = () => {
+//   const images = [car,car2];
+//   const [currentImage, setCurrentImage] = useState(null);
+//   useEffect(() => {
+//     const intervalId = setInterval(() => {
+//         setCurrentImage(images[Math.floor(Math.random() * images.length)]);
+//     }, 3000)
+    
+//     return () => clearInterval(intervalId);
+// }, [])
+
     return (
       <div>
         <div className="hero lg:h-[480px] w-[100%] bg-base-200"
