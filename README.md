@@ -1,15 +1,22 @@
 # website name : Chaka
+- adminEmail:
+- adminPassword : 123456
 
 # Live Site : https://a-12-chaka.web.app
 
 
 # About Project 
 
-- This is a second hand car selling,buyong web site. In this project I am using tailwind css,daisy ui ,react-router-dom,react-icons,toast etc
 
-- when a user will sign in there will two option seller / user
-- seller can add products afetr adding product he can see his productd my product option
-- admin will be able to see all seller.and admin can delete seller
-- admin can verify a seller
-- seller have a optiion advertise product and that will show in home page any user can be abale to see thats product
+- This is a website for buying and selling second hand cars.
+  In this project I am using  tailwind css,daisy ui ,react-router-dom,react-icons,toast etc
+
+- There are three types of users: buyers, sellers and admin.
+  If the user signs in with Google, he will be signed in as a buyer. 
+
+- User can sign up as user or seller while signing up.
+- Seller can post and advertise for product sale. They will show on the home page.
+- Buyers can purchase the product and  then payment status will be  changed for that product.       After this that product will not show in the category page and advertisement anymore.
+- Admin can view, delete and verify all sellers.  After verification, seller's post will get verified update
+- There is a   blog page
 
