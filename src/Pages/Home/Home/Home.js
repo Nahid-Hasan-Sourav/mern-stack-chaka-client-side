@@ -4,6 +4,8 @@ import Banner from '../Banner/Banner';
 import Categories from '../Categories/Categories';
 import WhyTrust from '../WhyTrust/WhyTrust';
 import Advertise from '../Advertise/Advertise';
+import DeliveryUpdate from '../DeliveryUpdate/DeliveryUpdate';
+import BuyingAndSelling from '../BuyingAndSelling/BuyingAndSelling';
 
 const Home = () => {
     return (
@@ -35,10 +37,18 @@ const Home = () => {
           
           <Advertise></Advertise>
         </section>
-
+           <section>
+            <BuyingAndSelling />
+            </section>
         <section>
           <DownloadBrochure></DownloadBrochure>
         </section>
+       
+        <section>
+          <DeliveryUpdate/>
+        </section>
+        
+       
       </div>
     );
 };

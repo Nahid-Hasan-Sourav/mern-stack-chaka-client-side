@@ -51,6 +51,7 @@ const MyProducts = () => {
         method: "DELETE",
         headers: {
           authorization: `bearer ${localStorage.getItem("chaka-token")}`,
+          
         },
       }
     )

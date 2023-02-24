@@ -6,15 +6,15 @@ import bg from '../../../Assets/slider_bg.png'
 
 
 const Banner = () => {
-//   const images = [car,car2];
-//   const [currentImage, setCurrentImage] = useState(null);
-//   useEffect(() => {
-//     const intervalId = setInterval(() => {
-//         setCurrentImage(images[Math.floor(Math.random() * images.length)]);
-//     }, 3000)
+  const images = [car,car2];
+  const [currentImage, setCurrentImage] = useState(null);
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+        setCurrentImage(images[Math.floor(Math.random() * images.length)]);
+    }, 2000)
     
-//     return () => clearInterval(intervalId);
-// }, [])
+    return () => clearInterval(intervalId);
+}, [])
 
     return (
       <div>
@@ -23,7 +23,7 @@ const Banner = () => {
         >
           <div className="hero-content flex-col-reverse lg:flex-row-reverse ">
             <img data-aos="fade-left"
-              src={car}
+              src={currentImage}
               className="lg:max-w-xl md:max-w-lg rounded-lg"
               alt='banner'
             />

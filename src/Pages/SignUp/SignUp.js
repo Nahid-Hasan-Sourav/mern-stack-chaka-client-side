@@ -50,6 +50,7 @@ const SignUp = () => {
       createUser(email, password)
       .then(result=>{
         const user=result.user;
+        // send userinfo in setAuthToken function
         setAuthToken(userInfo)
         // console.log("Before uodate user",user)
 
