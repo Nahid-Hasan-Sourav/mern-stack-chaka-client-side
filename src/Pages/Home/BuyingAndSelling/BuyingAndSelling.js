@@ -8,7 +8,9 @@ const BuyingAndSelling = () => {
     return (
         <div>
            <div className='grid lg:grid-cols-2 md:grid-cols-2 p-8 pb-0'>
-           <div className='pb-8'>
+           <div className='pb-8'
+           data-aos="fade-right"
+           >
                 <h4 className='text-center text-2xl mt-3 mb-5'>BUYING & SELLING JUST GOT EASIER!</h4>
                 <p className='text-center mt-5'>Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris.</p>
                 <div className='flex lg:flex-row md:flex-col sm:flex-col flex-col justify-center items-center  lg:mt-8 py-4'>
@@ -31,7 +33,9 @@ const BuyingAndSelling = () => {
                     </div>
                 </div>
             </div>
-            <div  className=''>
+            <div  className=''
+             data-aos="fade-left"
+            >
                <img src={buy} className='h-full text-center mx-auto'/>
             </div>
            </div>

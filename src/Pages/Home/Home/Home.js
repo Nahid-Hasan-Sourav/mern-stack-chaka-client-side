@@ -6,6 +6,7 @@ import WhyTrust from '../WhyTrust/WhyTrust';
 import Advertise from '../Advertise/Advertise';
 import DeliveryUpdate from '../DeliveryUpdate/DeliveryUpdate';
 import BuyingAndSelling from '../BuyingAndSelling/BuyingAndSelling';
+import FiftyDiscount from '../Discount/FiftyDiscount/FiftyDiscount';
 
 const Home = () => {
     return (
@@ -13,6 +14,7 @@ const Home = () => {
         <section className="w-[100%]">
           <Banner></Banner>
         </section>
+        
         <section className="py-8">
           <div>
             <h3 className="font-extrabold text-3xl my-8 " data-aos="fade-right">
@@ -20,6 +22,11 @@ const Home = () => {
             </h3>
             <WhyTrust></WhyTrust>
           </div>
+        </section>
+
+
+        <section className='py-8'>
+        <FiftyDiscount></FiftyDiscount>
         </section>
 
         <section>
