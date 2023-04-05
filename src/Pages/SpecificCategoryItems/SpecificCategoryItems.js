@@ -4,6 +4,7 @@ import { Link, useLoaderData } from "react-router-dom";
 import { getRole } from "../../Api/UserRole";
 import BookingModal from "../../Components/BookingModal/BookingModal";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
+import { FaCheckCircle } from "react-icons/fa";
 
 const SpecificCategoryItems = () => {
   const { user } = useContext(AuthContext);
@@ -145,8 +146,21 @@ const SpecificCategoryItems = () => {
                           {data?.userInfo?.userName}
                         </div>
                         <div className="text-sm opacity-50">
-                          {data.userRole}
-                        </div>
+                                {data?.sellerStatus ? (
+                                  <button className="btn btn-[#808080] btn-xs">
+                                    <FaCheckCircle className="text-success inline"></FaCheckCircle>
+                                    <span className="mx-2 text-success ">
+                                      {" "}
+                                      {data.sellerStatus}
+                                    </span>
+                                  </button>
+                                ) : (
+                                  <button className="btn btn-[#808080] btn-xs">
+                                    UNVERIFIED
+                                  </button>
+                                )}
+                              </div>
+                    
                       </div>
                     </div>
                   </div>

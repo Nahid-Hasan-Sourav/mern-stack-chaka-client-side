@@ -1,7 +1,7 @@
 // import { async } from "@firebase/util";
 
 export const getRole = async (email) => {
-  const url = `https://a-12-chakka-server-side.vercel.app/user/${email}`;
+  // const url = `https://a-12-chakka-server-side.vercel.app/user/${email}`;
 
   const response = await fetch(
     `https://a-12-chakka-server-side.vercel.app/user/${email}`,
@@ -15,7 +15,7 @@ export const getRole = async (email) => {
   );
 
   const user = await response.json();
-  console.log("User Role Func ", user);
+  console.log("User Role Func this is from userRole.js ", user);
   return user;
 };
 

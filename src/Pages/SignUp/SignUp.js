@@ -46,7 +46,7 @@ const SignUp = () => {
         image:imgData.data.url,
         role:userRole
       }
-
+      console.log("This is from sign up for check user role ",userInfo);
       createUser(email, password)
       .then(result=>{
         const user=result.user;

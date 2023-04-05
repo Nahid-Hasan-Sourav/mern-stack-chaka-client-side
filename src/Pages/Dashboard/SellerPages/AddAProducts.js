@@ -95,7 +95,7 @@ const AddAProducts = () => {
         price: data.productOrginalPrice,
         resalePrice: data.productResalePrice,
         imgUrl: imgData.data.display_url,
-        sellerStatus,
+        sellerStatus:sellerStatus,
         time,
         date,
         userInfo,
